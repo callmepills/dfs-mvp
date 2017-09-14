@@ -1,14 +1,18 @@
-<h1>DraftKings Valuator</h1>
+<div class="container">
+  <div class="page-header">
+    <h1>DraftKings Valuator</h1>
+  </div>
 
-<table>
-  <tr>
-    <th>Position</th>
-    <th>Name</th>
-    <th>Salary</th>
-  </tr>
-  <tr *ngFor="let player of playerList">
-    <td>{{player.pn}}</td>
-    <td>{{player.fn}} {{player.ln}}</td>
-    <td>{{player.s}}</td>
-  </tr>
-</table>
+  <table class="table table-hover">
+    <tr>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Salary</th>
+    </tr>
+    <tr *ngFor="let player of playerList">
+      <td>{{player.pn}}</td>
+      <td>{{player.fn}} {{player.ln}}</td>
+      <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+  </table>
+</div>
