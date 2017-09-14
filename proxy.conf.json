@@ -1,0 +1,7 @@
+{
+  "/lineup": {
+    "target": "https://www.draftkings.com",
+    "changeOrigin": true,
+    "secure": false
+  }
+}

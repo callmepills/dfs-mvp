@@ -1,0 +1,14 @@
+<h1>DraftKings Valuator</h1>
+
+<table>
+  <tr>
+    <th>Position</th>
+    <th>Name</th>
+    <th>Salary</th>
+  </tr>
+  <tr *ngFor="let player of playerList">
+    <td>{{player.pn}}</td>
+    <td>{{player.fn}} {{player.ln}}</td>
+    <td>{{player.s}}</td>
+  </tr>
+</table>
