@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
 
 import { Player } from './player';
+import { Ranking } from './ranking';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,14 @@ import { Player } from './player';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  quarterBacks: Player[];
+
+  qbRankings: Ranking[];
+  rbRankings: Ranking[];
+  wrRankings: Ranking[];
+  teRankings: Ranking[];
+  dstRankings: Ranking[];
+
+  quarterbacks: Player[];
   runningBacks: Player[];
   wideReceivers: Player[];
   tightEnds: Player[];
@@ -19,23 +28,84 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.quarterBacks = [];
+    this.quarterbacks = [];
     this.runningBacks = [];
     this.wideReceivers = [];
     this.tightEnds = [];
     this.defenses = [];
 
-    this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=15221')
-      .subscribe(data => {
-        data['playerList'].forEach((player) => {
-          switch (player.pn) {
-            case 'QB': this.quarterBacks.push(player); break;
-            case 'RB': this.runningBacks.push(player); break;
-            case 'WR': this.wideReceivers.push(player); break;
-            case 'TE': this.tightEnds.push(player); break;
-            case 'DST': this.defenses.push(player); break;
-          }
-        });
+    Observable.forkJoin(
+      this.http.get('/rankings/espn/quarterbacks'),
+      this.http.get('/rankings/espn/running-backs'),
+      this.http.get('/rankings/espn/wide-receivers'),
+      this.http.get('/rankings/espn/tight-ends'),
+      this.http.get('/rankings/espn/defenses'),
+      this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=15221')
+    ).subscribe((response: Object) => {
+
+      this.qbRankings = response[0] as Ranking[];
+      this.rbRankings = response[1] as Ranking[];
+      this.wrRankings = response[2] as Ranking[];
+      this.teRankings = response[3] as Ranking[];
+      this.dstRankings = response[4] as Ranking[];
+
+      response[5]['playerList'].forEach((dkPlayer) => {
+        const player: Player = new Player();
+        player.position = dkPlayer.pn;
+        player.name = (dkPlayer.fn + ' ' + dkPlayer.ln).trim();
+        player.salary = dkPlayer.s;
+        const ranking: Ranking = this.findRanking(player);
+        if (ranking) {
+          player.ranking = ranking.overall;
+        }
+        this.addPlayer(player);
       });
+    });
+  }
+
+  findRanking(player: Player): Ranking {
+    let rankings: Ranking[];
+
+    switch (player.position) {
+      case 'QB':
+        rankings = this.qbRankings;
+        break;
+      case 'RB':
+        rankings = this.rbRankings;
+        break;
+      case 'WR':
+        rankings = this.wrRankings;
+        break;
+      case 'TE':
+        rankings = this.teRankings;
+        break;
+      case 'DST':
+        rankings = this.dstRankings;
+        break;
+    }
+
+    return rankings.find((ranking) => {
+      return ranking.name === player.name;
+    });
+  }
+
+  addPlayer(player: Player): void {
+    switch (player.position) {
+      case 'QB':
+        this.quarterbacks.push(player);
+        break;
+      case 'RB':
+        this.runningBacks.push(player);
+        break;
+      case 'WR':
+        this.wideReceivers.push(player);
+        break;
+      case 'TE':
+        this.tightEnds.push(player);
+        break;
+      case 'DST':
+        this.defenses.push(player);
+        break;
+    }
   }
 }

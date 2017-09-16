@@ -7,7 +7,7 @@
     <ul class="nav nav-pills nav-justified" role="tablist">
       <li role="presentation" class="active">
         <a href="#qb" aria-controls="qb" role="tab" data-toggle="tab">
-          QB <span class="badge">{{quarterBacks.length}}</span>
+          QB <span class="badge">{{quarterbacks.length}}</span>
         </a>
       </li>
       <li role="presentation">
@@ -38,11 +38,13 @@
             <th>Position</th>
             <th>Name</th>
             <th>Salary</th>
+            <th>Ranking</th>
           </tr>
-          <tr *ngFor="let player of quarterBacks">
-            <td>{{player.pn}}</td>
-            <td>{{player.fn}} {{player.ln}}</td>
-            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+          <tr *ngFor="let player of quarterbacks">
+            <td>{{player.position}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.ranking}}</td>
           </tr>
         </table>
       </div>
@@ -52,11 +54,13 @@
             <th>Position</th>
             <th>Name</th>
             <th>Salary</th>
+            <th>Ranking</th>
           </tr>
           <tr *ngFor="let player of runningBacks">
-            <td>{{player.pn}}</td>
-            <td>{{player.fn}} {{player.ln}}</td>
-            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.position}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.ranking}}</td>
           </tr>
         </table>
       </div>
@@ -66,11 +70,13 @@
             <th>Position</th>
             <th>Name</th>
             <th>Salary</th>
+            <th>Ranking</th>
           </tr>
           <tr *ngFor="let player of wideReceivers">
-            <td>{{player.pn}}</td>
-            <td>{{player.fn}} {{player.ln}}</td>
-            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.position}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.ranking}}</td>
           </tr>
         </table>
       </div>
@@ -80,11 +86,13 @@
             <th>Position</th>
             <th>Name</th>
             <th>Salary</th>
+            <th>Ranking</th>
           </tr>
           <tr *ngFor="let player of tightEnds">
-            <td>{{player.pn}}</td>
-            <td>{{player.fn}} {{player.ln}}</td>
-            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.position}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.ranking}}</td>
           </tr>
         </table>
       </div>
@@ -94,11 +102,13 @@
             <th>Position</th>
             <th>Name</th>
             <th>Salary</th>
+            <th>Ranking</th>
           </tr>
           <tr *ngFor="let player of defenses">
-            <td>{{player.pn}}</td>
-            <td>{{player.fn}} {{player.ln}}</td>
-            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.position}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+            <td>{{player.ranking}}</td>
           </tr>
         </table>
       </div>

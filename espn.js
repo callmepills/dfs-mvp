@@ -3,6 +3,17 @@ const router = express.Router();
 const request = require('request');
 const cheerio = require('cheerio');
 
+function getName(td) {
+  var name;
+  if (td.indexOf(',') === -1) {
+    name = td.substring(td.indexOf('.') + 2);
+    name = name.substring(name.lastIndexOf(' ') + 1);
+  } else {
+    name = td.substring(td.indexOf('.') + 2, td.indexOf(','));
+  }
+  return name;
+}
+
 function getRankings(url, callback) {
   request.get(url, function (error, response, body) {
     var table = body.substring(body.indexOf('var newTable = jQuery(\'') + 23);
@@ -12,7 +23,7 @@ function getRankings(url, callback) {
       var $tr = $(this), td = $tr.find('td:nth-child(1)').text();
       return {
         overall: td.substring(0, td.indexOf('.')),
-        name: td.indexOf(',') === -1 ? td.substring(td.indexOf('.') + 2) : td.substring(td.indexOf('.') + 2, td.indexOf(',')),
+        name: getName(td),
         opp: $tr.find('td:nth-child(2)').text(),
         berry: $tr.find('td:nth-child(3)').text(),
         karabell: $tr.find('td:nth-child(4)').text(),

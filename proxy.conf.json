@@ -1,4 +1,8 @@
 {
+  "/rankings": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
   "/lineup": {
     "target": "https://www.draftkings.com",
     "changeOrigin": true,

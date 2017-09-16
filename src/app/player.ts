@@ -1,6 +1,6 @@
 export class Player {
-  pn;
-  fn;
-  ln;
-  s;
+  position: string;
+  name: string;
+  salary: number;
+  ranking: number;
 }
