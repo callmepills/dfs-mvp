@@ -2,9 +2,9 @@ export class Ranking {
   overall: number;
   name: string;
   opp: string;
-  berry: number;
-  karabell: number;
-  yates: number;
-  cockroft: number;
+  berry: string;
+  karabell: string;
+  yates: string;
+  cockroft: string;
   avg: number;
 }

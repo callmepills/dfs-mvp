@@ -59,8 +59,8 @@ export class AppComponent implements OnInit {
         player.oprk = dkPlayer.or;
         player.salary = dkPlayer.s;
         const ranking: Ranking = this.findRanking(player);
-        if (ranking) {
-          player.ranking = ranking.overall;
+        if (ranking && ranking.berry !== 'NR') {
+          player.ranking = +ranking.berry;
           this.addPlayer(player);
         }
       });
