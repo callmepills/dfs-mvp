@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
+import { DKPlayer } from './dkplayer';
 import { Player } from './player';
 import { Ranking } from './ranking';
 
@@ -49,10 +50,13 @@ export class AppComponent implements OnInit {
       this.teRankings = response[3] as Ranking[];
       this.dstRankings = response[4] as Ranking[];
 
-      response[5]['playerList'].forEach((dkPlayer) => {
+      response[5]['playerList'].forEach((dkPlayer: DKPlayer) => {
         const player: Player = new Player();
         player.position = dkPlayer.pn;
         player.name = (dkPlayer.fn + ' ' + dkPlayer.ln).trim();
+        player.opp = dkPlayer.atabbr + ' @ ' + dkPlayer.htabbr;
+        player.fppg = dkPlayer.ppg;
+        player.oprk = dkPlayer.or;
         player.salary = dkPlayer.s;
         const ranking: Ranking = this.findRanking(player);
         if (ranking) {
