@@ -61,16 +61,15 @@ export class AppComponent implements OnInit {
         const ranking: Ranking = this.findRanking(player);
         if (ranking && ranking.berry !== 'NR') {
           player.ranking = +ranking.berry;
-          player.value = this.calculateValue(player);
           this.addPlayer(player);
         }
       });
 
-      this.determineMVPs(this.quarterbacks, 3);
-      this.determineMVPs(this.runningBacks, 6);
-      this.determineMVPs(this.wideReceivers, 6);
-      this.determineMVPs(this.tightEnds, 3);
-      this.determineMVPs(this.defenses, 3);
+      this.calculateValues(this.quarterbacks, 3);
+      this.calculateValues(this.runningBacks, 6);
+      this.calculateValues(this.wideReceivers, 6);
+      this.calculateValues(this.tightEnds, 3);
+      this.calculateValues(this.defenses, 3);
 
       this.quarterbacks.sort(this.compareRanking);
       this.runningBacks.sort(this.compareRanking);
@@ -126,24 +125,20 @@ export class AppComponent implements OnInit {
     }
   }
 
-  calculateValue(player: Player): number {
-    switch (player.position) {
-      case 'QB':
-      case 'TE':
-        return player.salary / (26 - player.ranking);
-      case 'RB':
-      case 'WR':
-        return player.salary / (51 - player.ranking);
-      case 'DST':
-        return player.salary / (31 - player.ranking);
-    }
-  }
+  calculateValues(players: Player[], mvpCount: number): void {
+    const maxRanking: number = Math.max(...players.map((player: Player) => {
+      return player.ranking;
+    }));
 
-  determineMVPs(players: Player[], count: number): void {
+    players.forEach((player: Player) => {
+      player.value = player.salary / (maxRanking + 1 - player.ranking);
+    });
+
     players.sort((a: Player, b: Player): number => {
       return a.value - b.value;
     });
-    for (let i = 0; i < count; i++) {
+
+    for (let i = 0; i < mvpCount; i++) {
       players[i].mvp = true;
     }
   }
