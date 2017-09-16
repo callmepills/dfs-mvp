@@ -124,11 +124,12 @@ export class AppComponent implements OnInit {
     switch (player.position) {
       case 'QB':
       case 'TE':
-      case 'DST':
         return player.salary / (26 - player.ranking);
       case 'RB':
       case 'WR':
         return player.salary / (51 - player.ranking);
+      case 'DST':
+        return player.salary / (31 - player.ranking);
     }
   }
 
