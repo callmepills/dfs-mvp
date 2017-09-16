@@ -3,16 +3,105 @@
     <h1>DraftKings Valuator</h1>
   </div>
 
-  <table class="table table-hover">
-    <tr>
-      <th>Position</th>
-      <th>Name</th>
-      <th>Salary</th>
-    </tr>
-    <tr *ngFor="let player of playerList">
-      <td>{{player.pn}}</td>
-      <td>{{player.fn}} {{player.ln}}</td>
-      <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
-    </tr>
-  </table>
+  <div>
+    <ul class="nav nav-pills nav-justified" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#qb" aria-controls="qb" role="tab" data-toggle="tab">
+          QB <span class="badge">{{quarterBacks.length}}</span>
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#rb" aria-controls="rb" role="tab" data-toggle="tab">
+          RB <span class="badge">{{runningBacks.length}}</span>
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#wr" aria-controls="wr" role="tab" data-toggle="tab">
+          WR <span class="badge">{{wideReceivers.length}}</span>
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#te" aria-controls="te" role="tab" data-toggle="tab">
+          TE <span class="badge">{{tightEnds.length}}</span>
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#dst" aria-controls="dst" role="tab" data-toggle="tab">
+          DST<span class="badge">{{defenses.length}}</span>
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in active" id="qb">
+        <table class="table table-hover">
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Salary</th>
+          </tr>
+          <tr *ngFor="let player of quarterBacks">
+            <td>{{player.pn}}</td>
+            <td>{{player.fn}} {{player.ln}}</td>
+            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="rb">
+        <table class="table table-hover">
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Salary</th>
+          </tr>
+          <tr *ngFor="let player of runningBacks">
+            <td>{{player.pn}}</td>
+            <td>{{player.fn}} {{player.ln}}</td>
+            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="wr">
+        <table class="table table-hover">
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Salary</th>
+          </tr>
+          <tr *ngFor="let player of wideReceivers">
+            <td>{{player.pn}}</td>
+            <td>{{player.fn}} {{player.ln}}</td>
+            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="te">
+        <table class="table table-hover">
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Salary</th>
+          </tr>
+          <tr *ngFor="let player of tightEnds">
+            <td>{{player.pn}}</td>
+            <td>{{player.fn}} {{player.ln}}</td>
+            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="dst">
+        <table class="table table-hover">
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Salary</th>
+          </tr>
+          <tr *ngFor="let player of defenses">
+            <td>{{player.pn}}</td>
+            <td>{{player.fn}} {{player.ln}}</td>
+            <td>{{player.s | currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
