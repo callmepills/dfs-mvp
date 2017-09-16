@@ -61,9 +61,15 @@ export class AppComponent implements OnInit {
         const ranking: Ranking = this.findRanking(player);
         if (ranking) {
           player.ranking = ranking.overall;
+          this.addPlayer(player);
         }
-        this.addPlayer(player);
       });
+
+      this.quarterbacks.sort(this.compareRanking);
+      this.runningBacks.sort(this.compareRanking);
+      this.wideReceivers.sort(this.compareRanking);
+      this.tightEnds.sort(this.compareRanking);
+      this.defenses.sort(this.compareRanking);
     });
   }
 
@@ -111,5 +117,9 @@ export class AppComponent implements OnInit {
         this.defenses.push(player);
         break;
     }
+  }
+
+  compareRanking(playerA: Player, playerB: Player): number {
+    return playerA.ranking - playerB.ranking;
   }
 }
