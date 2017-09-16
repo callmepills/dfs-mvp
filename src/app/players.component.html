@@ -1,0 +1,14 @@
+<table class="table table-hover">
+  <tr>
+    <th>Position</th>
+    <th>Name</th>
+    <th>Salary</th>
+    <th>Ranking</th>
+  </tr>
+  <tr *ngFor="let player of players">
+    <td>{{player.position}}</td>
+    <td>{{player.name}}</td>
+    <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+    <td>{{player.ranking}}</td>
+  </tr>
+</table>

@@ -33,84 +33,19 @@
     </ul>
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane fade in active" id="qb">
-        <table class="table table-hover">
-          <tr>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Ranking</th>
-          </tr>
-          <tr *ngFor="let player of quarterbacks">
-            <td>{{player.position}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
-            <td>{{player.ranking}}</td>
-          </tr>
-        </table>
+        <app-players [players]="quarterbacks"></app-players>
       </div>
       <div role="tabpanel" class="tab-pane fade" id="rb">
-        <table class="table table-hover">
-          <tr>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Ranking</th>
-          </tr>
-          <tr *ngFor="let player of runningBacks">
-            <td>{{player.position}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
-            <td>{{player.ranking}}</td>
-          </tr>
-        </table>
+        <app-players [players]="runningBacks"></app-players>
       </div>
       <div role="tabpanel" class="tab-pane fade" id="wr">
-        <table class="table table-hover">
-          <tr>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Ranking</th>
-          </tr>
-          <tr *ngFor="let player of wideReceivers">
-            <td>{{player.position}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
-            <td>{{player.ranking}}</td>
-          </tr>
-        </table>
+        <app-players [players]="wideReceivers"></app-players>
       </div>
       <div role="tabpanel" class="tab-pane fade" id="te">
-        <table class="table table-hover">
-          <tr>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Ranking</th>
-          </tr>
-          <tr *ngFor="let player of tightEnds">
-            <td>{{player.position}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
-            <td>{{player.ranking}}</td>
-          </tr>
-        </table>
+        <app-players [players]="tightEnds"></app-players>
       </div>
       <div role="tabpanel" class="tab-pane fade" id="dst">
-        <table class="table table-hover">
-          <tr>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Ranking</th>
-          </tr>
-          <tr *ngFor="let player of defenses">
-            <td>{{player.position}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
-            <td>{{player.ranking}}</td>
-          </tr>
-        </table>
+        <app-players [players]="defenses"></app-players>
       </div>
     </div>
   </div>
