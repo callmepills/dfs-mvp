@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
+    "start:api": "node app.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,8 +27,11 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "bootstrap": "^3.3.7",
+    "cheerio": "^1.0.0-rc.2",
     "core-js": "^2.4.1",
+    "express": "^4.15.4",
     "jquery": "^3.2.1",
+    "request": "^2.81.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
