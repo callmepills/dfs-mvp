@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PlayersComponent } from './players.component';
+import { NthPipe } from './nth.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayersComponent
+    PlayersComponent,
+    NthPipe
   ],
   imports: [
     BrowserModule,
