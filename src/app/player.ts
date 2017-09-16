@@ -6,4 +6,5 @@ export class Player {
   oprk: number;
   salary: number;
   ranking: number;
+  value: number;
 }

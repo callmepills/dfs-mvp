@@ -7,6 +7,7 @@
     <th>OPRK</th>
     <th>SALARY</th>
     <th>RANKING</th>
+    <th>VALUE</th>
   </tr>
   <tr *ngFor="let player of players">
     <td>{{player.position}}</td>
@@ -16,5 +17,6 @@
     <td>{{player.oprk}}</td>
     <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
     <td>{{player.ranking}}</td>
+    <td>{{player.value | currency:'USD':true:'1.0-0'}}</td>
   </tr>
 </table>

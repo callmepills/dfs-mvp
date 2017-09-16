@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
         const ranking: Ranking = this.findRanking(player);
         if (ranking && ranking.berry !== 'NR') {
           player.ranking = +ranking.berry;
+          player.value = this.calculateValue(player);
           this.addPlayer(player);
         }
       });
@@ -116,6 +117,18 @@ export class AppComponent implements OnInit {
       case 'DST':
         this.defenses.push(player);
         break;
+    }
+  }
+
+  calculateValue(player: Player): number {
+    switch (player.position) {
+      case 'QB':
+      case 'TE':
+      case 'DST':
+        return player.salary / (26 - player.ranking);
+      case 'RB':
+      case 'WR':
+        return player.salary / (51 - player.ranking);
     }
   }
 
