@@ -66,6 +66,12 @@ export class AppComponent implements OnInit {
         }
       });
 
+      this.determineMVPs(this.quarterbacks, 3);
+      this.determineMVPs(this.runningBacks, 6);
+      this.determineMVPs(this.wideReceivers, 6);
+      this.determineMVPs(this.tightEnds, 3);
+      this.determineMVPs(this.defenses, 3);
+
       this.quarterbacks.sort(this.compareRanking);
       this.runningBacks.sort(this.compareRanking);
       this.wideReceivers.sort(this.compareRanking);
@@ -130,6 +136,15 @@ export class AppComponent implements OnInit {
         return player.salary / (51 - player.ranking);
       case 'DST':
         return player.salary / (31 - player.ranking);
+    }
+  }
+
+  determineMVPs(players: Player[], count: number): void {
+    players.sort((a: Player, b: Player): number => {
+      return a.value - b.value;
+    });
+    for (let i = 0; i < count; i++) {
+      players[i].mvp = true;
     }
   }
 

@@ -9,7 +9,7 @@
     <th>RANKING</th>
     <th>VALUE</th>
   </tr>
-  <tr *ngFor="let player of players">
+  <tr *ngFor="let player of players" [ngClass]="{'bg-info': player.mvp}">
     <td>{{player.position}}</td>
     <td>{{player.name}}</td>
     <td>{{player.opp}}</td>

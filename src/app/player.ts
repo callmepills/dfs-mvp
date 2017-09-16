@@ -7,4 +7,5 @@ export class Player {
   salary: number;
   ranking: number;
   value: number;
+  mvp: boolean;
 }
