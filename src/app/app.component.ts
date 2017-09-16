@@ -19,22 +19,16 @@ export class AppComponent implements OnInit {
   teRankings: Ranking[];
   dstRankings: Ranking[];
 
-  quarterbacks: Player[];
-  runningBacks: Player[];
-  wideReceivers: Player[];
-  tightEnds: Player[];
-  defenses: Player[];
+  quarterbacks: Player[] = [];
+  runningBacks: Player[] = [];
+  wideReceivers: Player[] = [];
+  tightEnds: Player[] = [];
+  defenses: Player[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.quarterbacks = [];
-    this.runningBacks = [];
-    this.wideReceivers = [];
-    this.tightEnds = [];
-    this.defenses = [];
-
     Observable.forkJoin(
       this.http.get('/rankings/espn/quarterbacks'),
       this.http.get('/rankings/espn/running-backs'),
@@ -100,9 +94,7 @@ export class AppComponent implements OnInit {
         break;
     }
 
-    return rankings.find((ranking) => {
-      return ranking.name === player.name;
-    });
+    return rankings.find((ranking) => ranking.name === player.name);
   }
 
   addPlayer(player: Player): void {
@@ -126,18 +118,12 @@ export class AppComponent implements OnInit {
   }
 
   calculateValues(players: Player[], mvpCount: number): void {
-    const maxRanking: number = Math.max(...players.map((player: Player) => {
-      return player.ranking;
-    }));
-
+    const maxRanking: number = Math.max(...players.map((player: Player) => player.ranking));
     players.forEach((player: Player) => {
       player.value = player.salary / (maxRanking + 1 - player.ranking);
     });
 
-    players.sort((a: Player, b: Player): number => {
-      return a.value - b.value;
-    });
-
+    players.sort((a: Player, b: Player): number => a.value - b.value);
     for (let i = 0; i < mvpCount; i++) {
       players[i].mvp = true;
     }
