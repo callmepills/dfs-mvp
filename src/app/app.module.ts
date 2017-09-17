@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PlayersComponent } from './players.component';
 import { NthPipe } from './nth.pipe';
+import { NavComponent } from './nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayersComponent,
-    NthPipe
+    NthPipe,
+    NavComponent
   ],
   imports: [
     BrowserModule,

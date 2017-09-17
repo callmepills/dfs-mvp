@@ -6,7 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NthPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    if (value === 11 || value === 12 || value === 13) {
+    if (value === 0) {
+      return '-';
+    } else if (value === 11 || value === 12 || value === 13) {
       return value + 'th';
     } else {
       switch (value % 10) {

@@ -48,8 +48,10 @@ export class AppComponent implements OnInit {
         const player: Player = new Player();
         player.position = dkPlayer.pn;
         player.name = (dkPlayer.fn + ' ' + dkPlayer.ln).trim();
-        player.opp = dkPlayer.atabbr + ' @ ' + dkPlayer.htabbr;
-        player.fppg = dkPlayer.ppg;
+        player.team = (dkPlayer.tid === dkPlayer.atid) ? dkPlayer.atabbr : dkPlayer.htabbr;
+        player.awayTeam = dkPlayer.atabbr;
+        player.homeTeam = dkPlayer.htabbr;
+        player.fppg = +dkPlayer.ppg;
         player.oprk = dkPlayer.or;
         player.salary = dkPlayer.s;
         const ranking: Ranking = this.findRanking(player);
@@ -61,7 +63,7 @@ export class AppComponent implements OnInit {
 
       this.calculateValues(this.quarterbacks, 3);
       this.calculateValues(this.runningBacks, 6);
-      this.calculateValues(this.wideReceivers, 6);
+      this.calculateValues(this.wideReceivers, 9);
       this.calculateValues(this.tightEnds, 3);
       this.calculateValues(this.defenses, 3);
 
