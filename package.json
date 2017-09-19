@@ -12,7 +12,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod && node server.js"
+    "postinstall": "ng build --prod",
+    "server": "node server.js"
   },
   "private": true,
   "repository": {
@@ -33,7 +34,9 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "express": "^4.15.4",
+    "express-http-proxy": "^1.0.6",
     "jquery": "^3.2.1",
+    "morgan": "^1.8.2",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
