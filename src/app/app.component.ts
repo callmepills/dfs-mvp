@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
         player.salary = dkPlayer.s;
         const ranking: Ranking = this.findRanking(player);
         if (ranking && ranking.berry !== 'NR') {
-          player.ranking = +ranking.berry;
+          player.rank = +ranking.berry;
           this.addPlayer(player);
         }
       });
@@ -67,11 +67,11 @@ export class AppComponent implements OnInit {
       this.calculateValues(this.tightEnds, 3);
       this.calculateValues(this.defenses, 3);
 
-      this.quarterbacks.sort(this.compareRanking);
-      this.runningBacks.sort(this.compareRanking);
-      this.wideReceivers.sort(this.compareRanking);
-      this.tightEnds.sort(this.compareRanking);
-      this.defenses.sort(this.compareRanking);
+      this.quarterbacks.sort(this.compareRank);
+      this.runningBacks.sort(this.compareRank);
+      this.wideReceivers.sort(this.compareRank);
+      this.tightEnds.sort(this.compareRank);
+      this.defenses.sort(this.compareRank);
     });
   }
 
@@ -120,9 +120,9 @@ export class AppComponent implements OnInit {
   }
 
   calculateValues(players: Player[], mvpCount: number): void {
-    const maxRanking: number = Math.max(...players.map((player: Player) => player.ranking));
+    const maxRanking: number = Math.max(...players.map((player: Player) => player.rank));
     players.forEach((player: Player) => {
-      player.value = player.salary / (maxRanking + 1 - player.ranking);
+      player.value = player.salary / (maxRanking + 1 - player.rank);
     });
 
     players.sort((a: Player, b: Player): number => a.value - b.value);
@@ -131,7 +131,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  compareRanking(playerA: Player, playerB: Player): number {
-    return playerA.ranking - playerB.ranking;
+  compareRank(playerA: Player, playerB: Player): number {
+    return playerA.rank - playerB.rank;
   }
 }

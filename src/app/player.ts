@@ -8,7 +8,7 @@ export class Player {
   fppg: number;
   oprk: number;
   salary: number;
-  ranking: number;
+  rank: number;
   value: number;
   mvp: boolean;
 }
