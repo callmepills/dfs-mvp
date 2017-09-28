@@ -1,0 +1,44 @@
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2">
+      <ul class="nav nav-pills nav-stacked text-center" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#qb" aria-controls="qb" role="tab" data-toggle="tab">QB</a>
+        </li>
+        <li role="presentation">
+          <a href="#rb" aria-controls="rb" role="tab" data-toggle="tab">RB</a>
+        </li>
+        <li role="presentation">
+          <a href="#wr" aria-controls="wr" role="tab" data-toggle="tab">WR</a>
+        </li>
+        <li role="presentation">
+          <a href="#te" aria-controls="te" role="tab" data-toggle="tab">TE</a>
+        </li>
+        <li role="presentation">
+          <a href="#dst" aria-controls="dst" role="tab" data-toggle="tab">DST</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-10">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="qb">
+          <app-players [players]="quarterbacks"></app-players>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="rb">
+          <app-players [players]="runningBacks"></app-players>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="wr">
+          <app-players [players]="wideReceivers"></app-players>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="te">
+          <app-players [players]="tightEnds"></app-players>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="dst">
+          <app-players [players]="defenses"></app-players>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
