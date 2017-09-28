@@ -30,12 +30,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     Observable.forkJoin(
-      this.http.get('/api/espn/football/2017/3/qb'),
-      this.http.get('/api/espn/football/2017/3/rb'),
-      this.http.get('/api/espn/football/2017/3/wr'),
-      this.http.get('/api/espn/football/2017/3/te'),
-      this.http.get('/api/espn/football/2017/3/dst'),
-      this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=15510')
+      this.http.get('/api/espn/football/2017/4/qb'),
+      this.http.get('/api/espn/football/2017/4/rb'),
+      this.http.get('/api/espn/football/2017/4/wr'),
+      this.http.get('/api/espn/football/2017/4/te'),
+      this.http.get('/api/espn/football/2017/4/dst'),
+      this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=15648')
     ).subscribe((response: Object) => {
 
       this.qbRankings = response[0] as Ranking[];
