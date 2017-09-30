@@ -1,0 +1,12 @@
+{
+  "/rankings": {
+    "target": "https://dfsmvpapi.herokuapp.com",
+    "changeOrigin": true,
+    "secure": false
+  },
+  "/lineup": {
+    "target": "https://www.draftkings.com",
+    "changeOrigin": true,
+    "secure": false
+  }
+}
