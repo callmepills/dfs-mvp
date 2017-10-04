@@ -6,12 +6,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { FootballRankingsComponent } from './football/football-rankings.component';
+import { FootballComponent } from './football/football.component';
 import { NthPipe } from './nth.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'football/:season/:week', component: FootballRankingsComponent }
+  { path: 'football/:season/:week', component: FootballComponent }
 ];
 
 @NgModule({
@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     AppComponent,
     NavComponent,
     HomeComponent,
-    FootballRankingsComponent,
+    FootballComponent,
     NthPipe
   ],
   imports: [

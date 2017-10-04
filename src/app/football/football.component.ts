@@ -9,10 +9,10 @@ import { Ranking } from './ranking';
 
 @Component({
   selector: 'app-football',
-  templateUrl: './football-rankings.component.html',
-  styleUrls: ['./football-rankings.component.css']
+  templateUrl: './football.component.html',
+  styleUrls: ['./football.component.css']
 })
-export class FootballRankingsComponent implements OnInit {
+export class FootballComponent implements OnInit {
 
   qbRankings: Ranking[];
   rbRankings: Ranking[];
