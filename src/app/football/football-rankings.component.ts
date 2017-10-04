@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { DKPlayer } from './dkplayer';
@@ -8,10 +9,10 @@ import { Ranking } from './ranking';
 
 @Component({
   selector: 'app-football',
-  templateUrl: './football.component.html',
-  styleUrls: ['./football.component.css']
+  templateUrl: './football-rankings.component.html',
+  styleUrls: ['./football-rankings.component.css']
 })
-export class FootballComponent implements OnInit {
+export class FootballRankingsComponent implements OnInit {
 
   qbRankings: Ranking[];
   rbRankings: Ranking[];
@@ -25,16 +26,19 @@ export class FootballComponent implements OnInit {
   tightEnds: Player[] = [];
   defenses: Player[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    const season = this.route.snapshot.paramMap.get('season');
+    const week = this.route.snapshot.paramMap.get('week');
     Observable.forkJoin(
-      this.http.get('/rankings/espn/football/2017/4/qb'),
-      this.http.get('/rankings/espn/football/2017/4/rb'),
-      this.http.get('/rankings/espn/football/2017/4/wr'),
-      this.http.get('/rankings/espn/football/2017/4/te'),
-      this.http.get('/rankings/espn/football/2017/4/dst'),
+      this.http.get(`/rankings/espn/football/${season}/${week}/qb`),
+      this.http.get(`/rankings/espn/football/${season}/${week}/rb`),
+      this.http.get(`/rankings/espn/football/${season}/${week}/wr`),
+      this.http.get(`/rankings/espn/football/${season}/${week}/te`),
+      this.http.get(`/rankings/espn/football/${season}/${week}/dst`),
       this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=15648')
     ).subscribe((response: Object) => {
 

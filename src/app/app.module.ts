@@ -4,13 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { FootballComponent } from './football/football.component';
+import { FootballRankingsComponent } from './football/football-rankings.component';
 import { NthPipe } from './nth.pipe';
 import { NavComponent } from './nav.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent },
-  { path: 'football', component: FootballComponent }
+  { path: 'football/:season/:week', component: FootballRankingsComponent }
 ];
 
 @NgModule({
@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     AppComponent,
     NthPipe,
     NavComponent,
-    FootballComponent
+    FootballRankingsComponent
   ],
   imports: [
     BrowserModule,
