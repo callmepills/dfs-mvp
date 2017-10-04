@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  footballWeeks: number[];
 
-  ngOnInit() {
+  constructor() {
   }
 
+  ngOnInit() {
+    this.footballWeeks = Array(17).fill(0).map((x, i) => ++i);
+  }
 }
