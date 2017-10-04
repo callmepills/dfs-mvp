@@ -4,10 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { PlayersComponent } from './players.component';
+import { PlayersComponent } from './football/players.component';
 import { NthPipe } from './nth.pipe';
 import { NavComponent } from './nav.component';
-import { FootballComponent } from './football.component';
+import { FootballComponent } from './football/football.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent },
