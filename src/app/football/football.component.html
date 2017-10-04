@@ -24,19 +24,119 @@
     <div class="col-xs-10">
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="qb">
-          <app-players [players]="quarterbacks"></app-players>
+          <table class="table table-hover">
+            <tr>
+              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
+              <th>NAME</th>
+              <th>OPP</th>
+              <th>FPPG</th>
+              <th>OPRK</th>
+              <th>SALARY</th>
+              <th>VALUE</th>
+            </tr>
+            <tr *ngFor="let player of quarterbacks" [ngClass]="{'info': player.mvp}">
+              <td>{{player.rank}}</td>
+              <td>{{player.name}}</td>
+              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong>  @ {{player.homeTeam}}</td>
+              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}}  @ <strong>{{player.homeTeam}}</strong></td>
+              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
+              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk | nth}}</td>
+              <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+              <td>{{player.value | currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+          </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="rb">
-          <app-players [players]="runningBacks"></app-players>
+          <table class="table table-hover">
+            <tr>
+              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
+              <th>NAME</th>
+              <th>OPP</th>
+              <th>FPPG</th>
+              <th>OPRK</th>
+              <th>SALARY</th>
+              <th>VALUE</th>
+            </tr>
+            <tr *ngFor="let player of runningBacks" [ngClass]="{'info': player.mvp}">
+              <td>{{player.rank}}</td>
+              <td>{{player.name}}</td>
+              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong>  @ {{player.homeTeam}}</td>
+              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}}  @ <strong>{{player.homeTeam}}</strong></td>
+              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
+              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk | nth}}</td>
+              <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+              <td>{{player.value | currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+          </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="wr">
-          <app-players [players]="wideReceivers"></app-players>
+          <table class="table table-hover">
+            <tr>
+              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
+              <th>NAME</th>
+              <th>OPP</th>
+              <th>FPPG</th>
+              <th>OPRK</th>
+              <th>SALARY</th>
+              <th>VALUE</th>
+            </tr>
+            <tr *ngFor="let player of wideReceivers" [ngClass]="{'info': player.mvp}">
+              <td>{{player.rank}}</td>
+              <td>{{player.name}}</td>
+              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong>  @ {{player.homeTeam}}</td>
+              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}}  @ <strong>{{player.homeTeam}}</strong></td>
+              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
+              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk | nth}}</td>
+              <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+              <td>{{player.value | currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+          </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="te">
-          <app-players [players]="tightEnds"></app-players>
+          <table class="table table-hover">
+            <tr>
+              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
+              <th>NAME</th>
+              <th>OPP</th>
+              <th>FPPG</th>
+              <th>OPRK</th>
+              <th>SALARY</th>
+              <th>VALUE</th>
+            </tr>
+            <tr *ngFor="let player of tightEnds" [ngClass]="{'info': player.mvp}">
+              <td>{{player.rank}}</td>
+              <td>{{player.name}}</td>
+              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong>  @ {{player.homeTeam}}</td>
+              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}}  @ <strong>{{player.homeTeam}}</strong></td>
+              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
+              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk | nth}}</td>
+              <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+              <td>{{player.value | currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+          </table>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="dst">
-          <app-players [players]="defenses"></app-players>
+          <table class="table table-hover">
+            <tr>
+              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
+              <th>NAME</th>
+              <th>OPP</th>
+              <th>FPPG</th>
+              <th>OPRK</th>
+              <th>SALARY</th>
+              <th>VALUE</th>
+            </tr>
+            <tr *ngFor="let player of defenses" [ngClass]="{'info': player.mvp}">
+              <td>{{player.rank}}</td>
+              <td>{{player.name}}</td>
+              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong>  @ {{player.homeTeam}}</td>
+              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}}  @ <strong>{{player.homeTeam}}</strong></td>
+              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
+              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk | nth}}</td>
+              <td>{{player.salary | currency:'USD':true:'1.0-0'}}</td>
+              <td>{{player.value | currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

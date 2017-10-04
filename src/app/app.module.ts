@@ -4,10 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { PlayersComponent } from './football/players.component';
+import { FootballComponent } from './football/football.component';
 import { NthPipe } from './nth.pipe';
 import { NavComponent } from './nav.component';
-import { FootballComponent } from './football/football.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent },
@@ -17,7 +16,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PlayersComponent,
     NthPipe,
     NavComponent,
     FootballComponent
