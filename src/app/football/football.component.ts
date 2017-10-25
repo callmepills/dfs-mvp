@@ -110,7 +110,11 @@ export class FootballComponent implements OnInit {
         break;
     }
 
-    return rankings.find((ranking) => ranking.name === player.name);
+    if (player.position === 'DST') {
+      return rankings.find((ranking) => ranking.name === player.name);
+    } else {
+      return rankings.find((ranking) => ranking.name === player.name && ranking.team === player.team);
+    }
   }
 
   addPlayer(player: Player): void {

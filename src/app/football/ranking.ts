@@ -7,4 +7,5 @@ export class Ranking {
   yates: string;
   cockroft: string;
   avg: number;
+  team: string;
 }
