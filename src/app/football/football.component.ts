@@ -48,7 +48,7 @@ export class FootballComponent implements OnInit {
           this.http.get(`/rankings/espn/football/${season}/${week}/wr`),
           this.http.get(`/rankings/espn/football/${season}/${week}/te`),
           this.http.get(`/rankings/espn/football/${season}/${week}/dst`),
-          this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=16004')
+          this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=16150')
         ).subscribe((response: Object) => {
 
           this.qbRankings = response[0] as Ranking[];
