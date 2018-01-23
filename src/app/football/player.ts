@@ -1,7 +1,4 @@
 export class Player {
-  position: string;
-  name: string;
-  team: string;
   awayTeam: string;
   homeTeam: string;
   opp: string;
@@ -11,4 +8,10 @@ export class Player {
   rank: number;
   value: number;
   mvp: boolean;
+
+  constructor(public position: string,
+              public name: string,
+              public team?: string) {
+
+  }
 }

@@ -13,7 +13,7 @@ app.use('/lineup', proxy('https://www.draftkings.com', {
   }
 }));
 
-app.use('/rankings', proxy('https://dfsmvpapi.herokuapp.com', {
+app.use('/rankings', proxy('https://espn-rankings.herokuapp.com', {
   proxyReqPathResolver: function (req) {
     return '/rankings' + require('url').parse(req.url).path;
   }

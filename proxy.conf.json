@@ -1,12 +1,18 @@
 {
-  "/lineup": {
+  "/draftkings": {
     "target": "https://www.draftkings.com",
     "changeOrigin": true,
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/draftkings": ""
+    }
   },
-  "/rankings": {
-    "target": "https://dfsmvpapi.herokuapp.com",
+  "/espn-rankings": {
+    "target": "https://espn-rankings.herokuapp.com",
     "changeOrigin": true,
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/espn-rankings": ""
+    }
   }
 }

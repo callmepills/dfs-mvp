@@ -43,12 +43,12 @@ export class FootballComponent implements OnInit {
         const week = params.get('week');
 
         Observable.forkJoin(
-          this.http.get(`/rankings/espn/football/${season}/${week}/qb`),
-          this.http.get(`/rankings/espn/football/${season}/${week}/rb`),
-          this.http.get(`/rankings/espn/football/${season}/${week}/wr`),
-          this.http.get(`/rankings/espn/football/${season}/${week}/te`),
-          this.http.get(`/rankings/espn/football/${season}/${week}/dst`),
-          this.http.get('/lineup/getavailableplayers?contestTypeId=21&draftGroupId=16818')
+          this.http.get(`/espn-rankings/football/${season}/${week}/qb`),
+          this.http.get(`/espn-rankings/football/${season}/${week}/rb`),
+          this.http.get(`/espn-rankings/football/${season}/${week}/wr`),
+          this.http.get(`/espn-rankings/football/${season}/${week}/te`),
+          this.http.get(`/espn-rankings/football/${season}/${week}/dst`),
+          this.http.get('/draftkings/lineup/getavailableplayers?contestTypeId=21&draftGroupId=16818')
         ).subscribe((response: Object) => {
 
           this.qbRankings = response[0] as Ranking[];
@@ -58,10 +58,10 @@ export class FootballComponent implements OnInit {
           this.dstRankings = response[4] as Ranking[];
 
           response[5]['playerList'].forEach((dkPlayer: DKPlayer) => {
-            const player: Player = new Player();
-            player.position = dkPlayer.pn;
-            player.name = (dkPlayer.fn + ' ' + dkPlayer.ln).trim();
-            player.team = (dkPlayer.tid === dkPlayer.atid) ? dkPlayer.atabbr : dkPlayer.htabbr;
+            const position = dkPlayer.pn;
+            const name = (dkPlayer.fn + ' ' + dkPlayer.ln).trim();
+            const team = (dkPlayer.tid === dkPlayer.atid) ? dkPlayer.atabbr : dkPlayer.htabbr;
+            const player: Player = new Player(position, name, team);
             player.awayTeam = dkPlayer.atabbr;
             player.homeTeam = dkPlayer.htabbr;
             player.fppg = +dkPlayer.ppg;
