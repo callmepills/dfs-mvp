@@ -4,8 +4,8 @@ node_js:
 install:
   - npm install
 script:
-  - npm lint
-  - npm test
+  - npm run lint
+  - npm test -- --browser=ChromeHeadless --single-run
 deploy:
   provider: heroku
   api_key:
