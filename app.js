@@ -7,13 +7,13 @@ const app = express();
 
 app.use(express.static(__dirname + '/dist'));
 
-app.use('/lineup', proxy('https://www.draftkings.com', {
+app.use('/draftkings', proxy('https://www.draftkings.com', {
   proxyReqPathResolver: function (req) {
     return '/lineup' + require('url').parse(req.url).path;
   }
 }));
 
-app.use('/rankings', proxy('https://espn-rankings.herokuapp.com', {
+app.use('/espn-rankings', proxy('https://espn-rankings.herokuapp.com', {
   proxyReqPathResolver: function (req) {
     return '/rankings' + require('url').parse(req.url).path;
   }
