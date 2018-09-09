@@ -32,7 +32,7 @@
               <th>SALARY</th>
               <th>VALUE</th>
             </tr>
-            <tr *ngFor="let player of quarterbacks" [ngClass]="{'info': player.mvp}">
+            <tr *ngFor="let player of quarterbacks" [ngClass]="{'bg-primary text-light': player.mvp}">
               <td>{{player.rank}}</td>
               <td>{{player.name}}</td>
               <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
@@ -59,7 +59,7 @@
               <th>SALARY</th>
               <th>VALUE</th>
             </tr>
-            <tr *ngFor="let player of runningBacks" [ngClass]="{'info': player.mvp}">
+            <tr *ngFor="let player of runningBacks" [ngClass]="{'bg-primary text-light': player.mvp}">
               <td>{{player.rank}}</td>
               <td>{{player.name}}</td>
               <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
@@ -86,7 +86,7 @@
               <th>SALARY</th>
               <th>VALUE</th>
             </tr>
-            <tr *ngFor="let player of wideReceivers" [ngClass]="{'info': player.mvp}">
+            <tr *ngFor="let player of wideReceivers" [ngClass]="{'bg-primary text-light': player.mvp}">
               <td>{{player.rank}}</td>
               <td>{{player.name}}</td>
               <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
@@ -113,7 +113,7 @@
               <th>SALARY</th>
               <th>VALUE</th>
             </tr>
-            <tr *ngFor="let player of tightEnds" [ngClass]="{'info': player.mvp}">
+            <tr *ngFor="let player of tightEnds" [ngClass]="{'bg-primary text-light': player.mvp}">
               <td>{{player.rank}}</td>
               <td>{{player.name}}</td>
               <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
@@ -140,7 +140,7 @@
               <th>SALARY</th>
               <th>VALUE</th>
             </tr>
-            <tr *ngFor="let player of defenses" [ngClass]="{'info': player.mvp}">
+            <tr *ngFor="let player of defenses" [ngClass]="{'bg-primary text-light': player.mvp}">
               <td>{{player.rank}}</td>
               <td>{{player.name}}</td>
               <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
