@@ -48,7 +48,7 @@ export class FootballComponent implements OnInit {
           this.http.get(`/espn-rankings/football/${season}/${week}/wr`),
           this.http.get(`/espn-rankings/football/${season}/${week}/te`),
           this.http.get(`/espn-rankings/football/${season}/${week}/dst`),
-          this.http.get('/draftkings/lineup/getavailableplayers?contestTypeId=21&draftGroupId=22018')
+          this.http.get('/draftkings/lineup/getavailableplayers?contestTypeId=21&draftGroupId=38119')
         ).subscribe((response: Object) => {
 
           this.qbRankings = response[0] as Ranking[];
@@ -68,7 +68,7 @@ export class FootballComponent implements OnInit {
             player.oprk = dkPlayer.or;
             player.salary = dkPlayer.s;
             const ranking: Ranking = this.findRanking(player);
-            if (ranking && ranking.berry !== 'NR') {
+            if (ranking && ranking.berry) {
               player.rank = +ranking.berry;
               this.addPlayer(player);
             }
@@ -111,7 +111,7 @@ export class FootballComponent implements OnInit {
     }
 
     if (player.position === 'DST') {
-      return rankings.find((ranking) => ranking.name === player.name);
+      return rankings.find((ranking) => ranking.name.toUpperCase() === player.team);
     } else {
       return rankings.find((ranking) => ranking.name === player.name && ranking.team === player.team);
     }
