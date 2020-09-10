@@ -63,9 +63,9 @@ describe('FootballComponent', () => {
     });
 
     it('returns dst if position is dst', () => {
-      const ranking = new Ranking('BAL');
+      const ranking = new Ranking('Bal');
       component.dstRankings = [ ranking ];
-      const result = component.findRanking(new Player('DST', 'BAL'));
+      const result = component.findRanking(new Player('DST', 'Ravens', 'BAL'));
       expect(result).toBe(ranking);
     });
   });
