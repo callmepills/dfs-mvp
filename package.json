@@ -2,8 +2,9 @@
   "name": "dfs-mvp",
   "version": "1.0.0",
   "license": "MIT",
-  "engines": {
-    "node": "8.9.4"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/callmepills/dfs-mvp.git"
   },
   "scripts": {
     "ng": "ng",
@@ -14,11 +15,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build --aot --prod"
-  },
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/callmepills/dfs-mvp.git"
   },
   "dependencies": {
     "@angular/animations": "^8.2.14",
@@ -63,5 +59,9 @@
     "protractor": "~5.3.0",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1"
-  }
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "private": true
 }
