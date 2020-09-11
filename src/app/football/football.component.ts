@@ -42,14 +42,14 @@ export class FootballComponent implements OnInit {
         const season = params.get('season');
         const week = params.get('week');
 
-        forkJoin(
+        forkJoin([
           this.http.get(`/espn-rankings/football/${season}/${week}/qb`),
           this.http.get(`/espn-rankings/football/${season}/${week}/rb`),
           this.http.get(`/espn-rankings/football/${season}/${week}/wr`),
           this.http.get(`/espn-rankings/football/${season}/${week}/te`),
           this.http.get(`/espn-rankings/football/${season}/${week}/dst`),
           this.http.get('/draftkings/lineup/getavailableplayers?contestTypeId=21&draftGroupId=38119')
-        ).subscribe((response: Object) => {
+        ]).subscribe((response: Object) => {
 
           this.qbRankings = response[0] as Ranking[];
           this.rbRankings = response[1] as Ranking[];
