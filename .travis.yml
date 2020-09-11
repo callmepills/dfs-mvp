@@ -5,7 +5,7 @@ install:
 - npm install
 script:
 - npm run lint
-- npm test -- --browser=PhantomJS --single-run
+- npm test -- --browsers=PhantomJS --watch=false
 deploy:
   provider: heroku
   api_key:
