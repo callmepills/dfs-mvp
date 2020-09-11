@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 import { DKPlayer } from './dkplayer';
 import { Player } from './player';
@@ -42,7 +42,7 @@ export class FootballComponent implements OnInit {
         const season = params.get('season');
         const week = params.get('week');
 
-        Observable.forkJoin(
+        forkJoin(
           this.http.get(`/espn-rankings/football/${season}/${week}/qb`),
           this.http.get(`/espn-rankings/football/${season}/${week}/rb`),
           this.http.get(`/espn-rankings/football/${season}/${week}/wr`),
