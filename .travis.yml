@@ -1,11 +1,13 @@
 language: node_js
 node_js:
 - node
+addons:
+  chrome: stable
 install:
 - npm install
 script:
 - npm run lint
-- npm test -- --browsers=PhantomJS --watch=false
+- npm test
 deploy:
   provider: heroku
   api_key:
