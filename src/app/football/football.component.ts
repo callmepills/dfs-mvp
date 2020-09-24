@@ -70,7 +70,7 @@ export class FootballComponent implements OnInit {
       if (!dkPlayer) { return; }
       player.loadDKPlayer(dkPlayer);
 
-      player.value = player.salary / (maxRank + 1 - player.rank)
+      player.value = player.salary / (maxRank + 1 - player.rank);
 
       this.players.push(player);
     });
