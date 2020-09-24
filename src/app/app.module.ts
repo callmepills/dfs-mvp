@@ -8,10 +8,11 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { FootballComponent } from './football/football.component';
 import { NthPipe } from './nth.pipe';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'football/:season/:week', component: FootballComponent }
+  { path: 'football', component: FootballComponent }
 ];
 
 @NgModule({
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],

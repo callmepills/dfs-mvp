@@ -1,4 +1,4 @@
-export class DKPlayer {
+export interface DKPlayer {
   fn: string;
   ln: string;
   pn: string;

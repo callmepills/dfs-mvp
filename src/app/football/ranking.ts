@@ -1,4 +1,6 @@
-export class Ranking {
+export interface Ranking {
+  name: string;
+  team: string;
   overall: number;
   opp: string;
   berry: string;
@@ -6,9 +8,4 @@ export class Ranking {
   yates: string;
   cockroft: string;
   avg: number;
-
-  constructor(public name: string,
-              public team?: string) {
-
-  }
 }

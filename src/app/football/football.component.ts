@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { DKPlayer } from './dkplayer';
 import { Player } from './player';
 import { Ranking } from './ranking';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-football',
@@ -14,142 +14,82 @@ import { Ranking } from './ranking';
 })
 export class FootballComponent implements OnInit {
 
-  qbRankings: Ranking[];
-  rbRankings: Ranking[];
-  wrRankings: Ranking[];
-  teRankings: Ranking[];
-  dstRankings: Ranking[];
+  SEASONS = [2017, 2018, 2019, 2020];
+  WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
-  quarterbacks: Player[];
-  runningBacks: Player[];
-  wideReceivers: Player[];
-  tightEnds: Player[];
-  defenses: Player[];
+  season = 2020;
+  week = 1;
+  position: 'QB' | 'RB' | 'WR' | 'TE' | 'DST' = 'QB';
+  expert = 'berry';
+  draftGroupId: number;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
-  }
+  dkPlayers: DKPlayer[];
+  rankings: Ranking[];
+
+  players: Player[];
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .subscribe((params: ParamMap) => {
-
-        this.quarterbacks = [];
-        this.runningBacks = [];
-        this.wideReceivers = [];
-        this.tightEnds = [];
-        this.defenses = [];
-
-        const season = params.get('season');
-        const week = params.get('week');
-
-        forkJoin([
-          this.http.get(`/espn-rankings/football/${season}/${week}/qb`),
-          this.http.get(`/espn-rankings/football/${season}/${week}/rb`),
-          this.http.get(`/espn-rankings/football/${season}/${week}/wr`),
-          this.http.get(`/espn-rankings/football/${season}/${week}/te`),
-          this.http.get(`/espn-rankings/football/${season}/${week}/dst`),
-          this.http.get('/draftkings/lineup/getavailableplayers?contestTypeId=21&draftGroupId=39913')
-        ]).subscribe((response: Object) => {
-
-          this.qbRankings = response[0] as Ranking[];
-          this.rbRankings = response[1] as Ranking[];
-          this.wrRankings = response[2] as Ranking[];
-          this.teRankings = response[3] as Ranking[];
-          this.dstRankings = response[4] as Ranking[];
-
-          response[5]['playerList'].forEach((dkPlayer: DKPlayer) => {
-            const position = dkPlayer.pn;
-            const name = (dkPlayer.fn + ' ' + dkPlayer.ln).trim();
-            const team = (dkPlayer.tid === dkPlayer.atid) ? dkPlayer.atabbr : dkPlayer.htabbr;
-            const player: Player = new Player(position, name, team);
-            player.awayTeam = dkPlayer.atabbr;
-            player.homeTeam = dkPlayer.htabbr;
-            player.fppg = +dkPlayer.ppg;
-            player.oprk = dkPlayer.or;
-            player.salary = dkPlayer.s;
-            const ranking: Ranking = this.findRanking(player);
-            if (ranking && ranking.berry) {
-              player.rank = +ranking.berry;
-              this.addPlayer(player);
-            }
-          });
-
-          this.calculateValues(this.quarterbacks, 3);
-          this.calculateValues(this.runningBacks, 6);
-          this.calculateValues(this.wideReceivers, 9);
-          this.calculateValues(this.tightEnds, 3);
-          this.calculateValues(this.defenses, 3);
-
-          this.quarterbacks.sort(this.compareRank);
-          this.runningBacks.sort(this.compareRank);
-          this.wideReceivers.sort(this.compareRank);
-          this.tightEnds.sort(this.compareRank);
-          this.defenses.sort(this.compareRank);
-        });
-      });
+    this.getRankings().subscribe();
   }
 
-  findRanking(player: Player): Ranking {
-    let rankings: Ranking[];
-
-    switch (player.position) {
-      case 'QB':
-        rankings = this.qbRankings;
-        break;
-      case 'RB':
-        rankings = this.rbRankings;
-        break;
-      case 'WR':
-        rankings = this.wrRankings;
-        break;
-      case 'TE':
-        rankings = this.teRankings;
-        break;
-      case 'DST':
-        rankings = this.dstRankings;
-        break;
-    }
-
-    if (player.position === 'DST') {
-      return rankings.find((ranking) => ranking.name.toUpperCase() === player.team);
-    } else {
-      return rankings.find((ranking) => ranking.name === player.name && ranking.team === player.team);
-    }
+  getRankings() {
+    return this.http.get<Ranking[]>(`/espn-rankings/football/${this.season}/${this.week}/${this.position.toLowerCase()}`)
+      .pipe(tap(rankings => this.rankings = rankings));
   }
 
-  addPlayer(player: Player): void {
-    switch (player.position) {
-      case 'QB':
-        this.quarterbacks.push(player);
-        break;
-      case 'RB':
-        this.runningBacks.push(player);
-        break;
-      case 'WR':
-        this.wideReceivers.push(player);
-        break;
-      case 'TE':
-        this.tightEnds.push(player);
-        break;
-      case 'DST':
-        this.defenses.push(player);
-        break;
-    }
+  getDKPlayers() {
+    return this.http.get<{ playerList: DKPlayer[] }>(`/draftkings/lineup/getavailableplayers?contestTypeId=21&draftGroupId=${this.draftGroupId}`)
+      .pipe(tap(response => this.dkPlayers = response.playerList));
   }
 
-  calculateValues(players: Player[], mvpCount: number): void {
-    const maxRanking: number = Math.max(...players.map((player: Player) => player.rank));
-    players.forEach((player: Player) => {
-      player.value = player.salary / (maxRanking + 1 - player.rank);
+  onRankingsChange(form: NgForm) {
+    delete this.players;
+    this.getRankings().subscribe(() => form.valid && this.loadPlayers());
+  }
+
+  onDKPlayersChange(form: NgForm) {
+    delete this.players;
+    if (form.invalid) { return; }
+    this.getDKPlayers().subscribe(() => this.loadPlayers());
+  }
+
+  loadPlayers() {
+    this.players = [];
+
+    this.rankings.forEach(ranking => {
+      const player = new Player();
+      player.loadRanking(ranking, this.position, this.expert);
+      if (!player.rank) { return; }
+
+      const dkPlayer = this.dkPlayers.find(dkp => player.equals(dkp));
+      if (!dkPlayer) { return; }
+      player.loadDKPlayer(dkPlayer);
+
+      this.players.push(player);
     });
 
-    players.sort((a: Player, b: Player): number => a.value - b.value);
+    const mvpCount = this.determineMVPCount();
+    this.players.sort((a, b) => a.value - b.value);
     for (let i = 0; i < mvpCount; i++) {
-      players[i].mvp = true;
+      this.players[i].mvp = true;
     }
+
+    this.players.sort((a, b) => a.rank - b.rank);
   }
 
-  compareRank(playerA: Player, playerB: Player): number {
-    return playerA.rank - playerB.rank;
+  determineMVPCount() {
+    switch (this.position) {
+      case 'WR':
+        return 9;
+      case 'RB':
+        return 6;
+      case 'QB':
+      case 'TE':
+      case 'DST':
+      default:
+        return 3;
+    }
   }
 }

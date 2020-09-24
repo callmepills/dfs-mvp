@@ -1,162 +1,59 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-2">
-      <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="qb-tab" data-toggle="tab" href="#qb" role="tab">QB</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="rb-tab" data-toggle="tab" href="#rb" role="tab">RB</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="wr-tab" data-toggle="tab" href="#wr" role="tab">WR</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="te-tab" data-toggle="tab" href="#te" role="tab">TE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="dst-tab" data-toggle="tab" href="#dst" role="tab">DST</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-10">
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="qb">
-          <table class="table table-hover">
-            <tr>
-              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
-              <th>NAME</th>
-              <th>OPP</th>
-              <th>FPPG</th>
-              <th>OPRK</th>
-              <th>SALARY</th>
-              <th>VALUE</th>
-            </tr>
-            <tr *ngFor="let player of quarterbacks" [ngClass]="{'bg-primary text-light': player.mvp}">
-              <td>{{player.rank}}</td>
-              <td>{{player.name}}</td>
-              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
-              </td>
-              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
-              </td>
-              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
-              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
-                nth}}
-              </td>
-              <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
-              <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>
-            </tr>
-          </table>
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="rb">
-          <table class="table table-hover">
-            <tr>
-              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
-              <th>NAME</th>
-              <th>OPP</th>
-              <th>FPPG</th>
-              <th>OPRK</th>
-              <th>SALARY</th>
-              <th>VALUE</th>
-            </tr>
-            <tr *ngFor="let player of runningBacks" [ngClass]="{'bg-primary text-light': player.mvp}">
-              <td>{{player.rank}}</td>
-              <td>{{player.name}}</td>
-              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
-              </td>
-              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
-              </td>
-              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
-              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
-                nth}}
-              </td>
-              <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
-              <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>
-            </tr>
-          </table>
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="wr">
-          <table class="table table-hover">
-            <tr>
-              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
-              <th>NAME</th>
-              <th>OPP</th>
-              <th>FPPG</th>
-              <th>OPRK</th>
-              <th>SALARY</th>
-              <th>VALUE</th>
-            </tr>
-            <tr *ngFor="let player of wideReceivers" [ngClass]="{'bg-primary text-light': player.mvp}">
-              <td>{{player.rank}}</td>
-              <td>{{player.name}}</td>
-              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
-              </td>
-              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
-              </td>
-              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
-              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
-                nth}}
-              </td>
-              <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
-              <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>
-            </tr>
-          </table>
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="te">
-          <table class="table table-hover">
-            <tr>
-              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
-              <th>NAME</th>
-              <th>OPP</th>
-              <th>FPPG</th>
-              <th>OPRK</th>
-              <th>SALARY</th>
-              <th>VALUE</th>
-            </tr>
-            <tr *ngFor="let player of tightEnds" [ngClass]="{'bg-primary text-light': player.mvp}">
-              <td>{{player.rank}}</td>
-              <td>{{player.name}}</td>
-              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
-              </td>
-              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
-              </td>
-              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
-              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
-                nth}}
-              </td>
-              <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
-              <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>
-            </tr>
-          </table>
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="dst">
-          <table class="table table-hover">
-            <tr>
-              <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
-              <th>NAME</th>
-              <th>OPP</th>
-              <th>FPPG</th>
-              <th>OPRK</th>
-              <th>SALARY</th>
-              <th>VALUE</th>
-            </tr>
-            <tr *ngFor="let player of defenses" [ngClass]="{'bg-primary text-light': player.mvp}">
-              <td>{{player.rank}}</td>
-              <td>{{player.name}}</td>
-              <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
-              </td>
-              <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
-              </td>
-              <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
-              <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
-                nth}}
-              </td>
-              <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
-              <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>
-            </tr>
-          </table>
-        </div>
+<div class="container mt-4">
+  <form autocomplete="off" #form="ngForm">
+    <div class="form-row">
+      <div class="col-auto">
+        <select class="form-control" name="season" [(ngModel)]="season" (change)="onRankingsChange(form)" required>
+          <option value="" disabled>Select Season</option>
+          <option *ngFor="let i of SEASONS" [value]="i">{{i}}</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <select class="form-control" name="week" [(ngModel)]="week" (change)="onRankingsChange(form)" required>
+          <option value="" disabled>Select Week</option>
+          <option *ngFor="let i of WEEKS" [value]="i">{{i}}</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <select class="form-control" name="position" [(ngModel)]="position" (change)="onRankingsChange(form)" required>
+          <option value="" disabled>Select Position</option>
+          <option *ngFor="let i of ['QB', 'RB', 'WR', 'TE', 'DST']" [value]="i">{{i}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <input type="number" class="form-control" name="draftGroupId" placeholder="Draft Group ID"
+          [(ngModel)]="draftGroupId" (change)="onDKPlayersChange(form)" required>
       </div>
     </div>
+  </form>
+  <div class="row mt-3" *ngIf="players">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>RANK <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></th>
+          <th>NAME</th>
+          <th>OPP</th>
+          <th>FPPG</th>
+          <th>OPRK</th>
+          <th>SALARY</th>
+          <th>VALUE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of players" [ngClass]="{'table-info': player.mvp}">
+          <td>{{player.rank}}</td>
+          <td>{{player.name}}</td>
+          <td *ngIf="player.team === player.awayTeam"><strong>{{player.awayTeam}}</strong> @ {{player.homeTeam}}
+          </td>
+          <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
+          </td>
+          <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
+          <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
+                nth}}
+          </td>
+          <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
+          <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
