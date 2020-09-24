@@ -12,6 +12,7 @@ export class Player {
   public oprk: number;
   public salary: number;
   public rank: number;
+  public value: number;
   public mvp = false;
 
   loadRanking(ranking: Ranking, position: string, expert: string) {
@@ -28,22 +29,6 @@ export class Player {
     this.fppg = +dkPlayer.ppg;
     this.oprk = dkPlayer.or;
     this.salary = dkPlayer.s;
-  }
-
-  get value(): number {
-    let maxRank: number;
-    switch (this.position) {
-      case 'QB':
-      case 'TE':
-      case 'DST':
-        maxRank = 25;
-        break;
-      case 'RB':
-      case 'WR':
-      default:
-        maxRank = 50;
-    }
-    return this.salary / (maxRank + 1 - this.rank);
   }
 
   equals(dkPlayer: DKPlayer) {

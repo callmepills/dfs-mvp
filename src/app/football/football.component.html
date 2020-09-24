@@ -2,6 +2,12 @@
   <form autocomplete="off" #form="ngForm">
     <div class="form-row">
       <div class="col-auto">
+        <select class="form-control" name="expert" [(ngModel)]="expert" (change)="onRankingsChange(form)" required>
+          <option value="" disabled>Select Expert</option>
+          <option *ngFor="let i of EXPERTS" [value]="i">{{i | titlecase}}</option>
+        </select>
+      </div>
+      <div class="col-auto">
         <select class="form-control" name="season" [(ngModel)]="season" (change)="onRankingsChange(form)" required>
           <option value="" disabled>Select Season</option>
           <option *ngFor="let i of SEASONS" [value]="i">{{i}}</option>
@@ -16,7 +22,7 @@
       <div class="col-auto">
         <select class="form-control" name="position" [(ngModel)]="position" (change)="onRankingsChange(form)" required>
           <option value="" disabled>Select Position</option>
-          <option *ngFor="let i of ['QB', 'RB', 'WR', 'TE', 'DST']" [value]="i">{{i}}</option>
+          <option *ngFor="let i of POSITIONS" [value]="i">{{i}}</option>
         </select>
       </div>
       <div class="col">
@@ -47,8 +53,8 @@
           <td *ngIf="player.team === player.homeTeam">{{player.awayTeam}} @ <strong>{{player.homeTeam}}</strong>
           </td>
           <td>{{player.fppg === 0 ? '-' : player.fppg}}</td>
-          <td [ngClass]="{'red': player.oprk > 0 && player.oprk < 10, 'green': player.oprk > 20}">{{player.oprk |
-                nth}}
+          <td [ngClass]="{'text-danger': player.oprk > 0 && player.oprk < 10, 'text-success': player.oprk > 20}">
+            {{player.oprk | nth}}
           </td>
           <td>{{player.salary | currency:'USD':'symbol':'1.0-0'}}</td>
           <td>{{player.value | currency:'USD':'symbol':'1.0-0'}}</td>

@@ -14,18 +14,19 @@ import { NgForm } from '@angular/forms';
 })
 export class FootballComponent implements OnInit {
 
+  EXPERTS = ['overall', 'berry', 'cockroft', 'karabell', 'yates'];
   SEASONS = [2017, 2018, 2019, 2020];
   WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  POSITIONS = ['QB', 'RB', 'WR', 'TE', 'DST'];
 
   season = 2020;
   week = 1;
-  position: 'QB' | 'RB' | 'WR' | 'TE' | 'DST' = 'QB';
+  position = 'QB';
   expert = 'berry';
   draftGroupId: number;
 
   dkPlayers: DKPlayer[];
   rankings: Ranking[];
-
   players: Player[];
 
   constructor(private http: HttpClient) { }
@@ -58,6 +59,8 @@ export class FootballComponent implements OnInit {
   loadPlayers() {
     this.players = [];
 
+    const maxRank = Math.max(...this.rankings.map(ranking => +ranking[this.expert]));
+
     this.rankings.forEach(ranking => {
       const player = new Player();
       player.loadRanking(ranking, this.position, this.expert);
@@ -66,6 +69,8 @@ export class FootballComponent implements OnInit {
       const dkPlayer = this.dkPlayers.find(dkp => player.equals(dkp));
       if (!dkPlayer) { return; }
       player.loadDKPlayer(dkPlayer);
+
+      player.value = player.salary / (maxRank + 1 - player.rank)
 
       this.players.push(player);
     });
