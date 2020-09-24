@@ -33,11 +33,9 @@ export class Player {
   get value(): number {
     let maxRank: number;
     switch (this.position) {
-      case 'DST':
-        maxRank = 20;
-        break;
       case 'QB':
       case 'TE':
+      case 'DST':
         maxRank = 25;
         break;
       case 'RB':
@@ -51,7 +49,7 @@ export class Player {
   equals(dkPlayer: DKPlayer) {
     const team = dkPlayer.tid === dkPlayer.atid ? dkPlayer.atabbr : dkPlayer.htabbr;
     if (this.position === 'DST') {
-      return this.team === team;
+      return dkPlayer.pn === 'DST' && this.team === team;
     } else {
       const name = `${dkPlayer.fn} ${dkPlayer.ln}`.trim();
       return this.name === name && this.team === team;
