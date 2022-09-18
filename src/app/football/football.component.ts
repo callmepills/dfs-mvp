@@ -14,15 +14,15 @@ import { NgForm } from '@angular/forms';
 })
 export class FootballComponent implements OnInit {
 
-  EXPERTS = ['overall', 'berry', 'cockroft', 'karabell', 'yates'];
-  SEASONS = [2017, 2018, 2019, 2020];
-  WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  EXPERTS = ['overall', 'bowen', 'clay', 'cockroft', 'dopp', 'karabell', 'loza', 'moody', 'yates'];
+  SEASONS = [2017, 2018, 2019, 2020, 2021, 2022];
+  WEEKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   POSITIONS = ['QB', 'RB', 'WR', 'TE', 'DST'];
 
-  season = 2020;
+  season = 2022;
   week = 1;
   position = 'QB';
-  expert = 'berry';
+  expert = 'clay';
   draftGroupId: number;
 
   dkPlayers: DKPlayer[];
